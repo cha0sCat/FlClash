@@ -61,16 +61,26 @@ Support the following actions
 
 <a href="https://chen08209.github.io/FlClash-fdroid-repo/repo?fingerprint=789D6D32668712EF7672F9E58DEEB15FBD6DCEEC5AE7A4371EA72F2AAE8A12FD"><img alt="Get it on F-Droid" src="snapshots/get-it-on-fdroid.svg" width="200px"/></a> <a href="https://github.com/chen08209/FlClash/releases"><img alt="Get it on GitHub" src="snapshots/get-it-on-github.svg" width="200px"/></a>
 
+
+## Development
+1. Install `Flutter` and `Golang` environment
+2. Generate core
+    ```bash
+    dart ./setup.dart android --out core
+    dart ./setup.dart windows --arch amd64 --out core
+    dart ./setup.dart linux --arch amd64 --out core
+    # ...
+    ```
+
+3. Generate ffi
+```bash
+dart run ffigen
+```
+
 ## Build
+1. Install `Flutter` and `Golang` environment
 
-1. Update submodules
-   ```bash
-   git submodule update --init --recursive
-   ```
-
-2. Install `Flutter` and `Golang` environment
-
-3. Build Application
+2. Build Application
 
     - android
 
