@@ -33,7 +33,7 @@ Future<void> main() async {
     selectedMap: config.currentSelectedMap,
   );
   final appFlowingState = AppFlowingState();
-  appState.navigationItems = navigation.getItems(
+  appState.navigationItems = navigation.getItems( // 设置侧边栏按钮
     openLogs: config.appSetting.openLogs,
     hasProxies: false,
   );

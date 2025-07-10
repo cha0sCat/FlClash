@@ -207,7 +207,7 @@ class AppState with ChangeNotifier {
     }
   }
 
-  List<Group> get currentGroups {
+  List<Group> get currentGroups { // 代理模式
     switch (mode) {
       case Mode.direct:
         return [];

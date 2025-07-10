@@ -352,7 +352,7 @@ class AppController {
     appState.setDelay(delay);
   }
 
-  toPage(int index, {bool hasAnimate = false}) {
+  toPage(int index, {bool hasAnimate = false}) { // 选页
     if (index > appState.currentNavigationItems.length - 1) {
       return;
     }

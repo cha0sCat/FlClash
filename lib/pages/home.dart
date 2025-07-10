@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
     required List<NavigationItem> navigationItems,
     required int currentIndex,
   }) {
-    if (viewMode == ViewMode.mobile) {
+    if (viewMode == ViewMode.mobile) { // 导航栏，手机样式下方
       return NavigationBar(
         destinations: navigationItems
             .map(
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
         selectedIndex: currentIndex,
       );
     }
-    return LayoutBuilder(
+    return LayoutBuilder( // 非手机的侧边栏
       builder: (_, container) {
         return Material(
           color: context.colorScheme.surfaceContainer,
@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
                                 context.textTheme.labelLarge!.copyWith(
                               color: context.colorScheme.onSurface,
                             ),
-                            destinations: navigationItems
+                            destinations: navigationItems // 页的按钮
                                 .map(
                                   (e) => NavigationRailDestination(
                                     icon: e.icon,
@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                IconButton(
+                IconButton( // 左下角按钮切换显示侧边按钮文字
                   onPressed: () {
                     final config = globalState.appController.config;
                     final appSetting = config.appSetting;

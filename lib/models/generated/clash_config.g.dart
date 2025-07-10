@@ -74,7 +74,7 @@ Map<String, dynamic> _$ClashConfigToJson(ClashConfig instance) =>
       'route-mode': _$RouteModeEnumMap[instance.routeMode]!,
     };
 
-const _$ModeEnumMap = {
+const _$ModeEnumMap = { // 代理模式
   Mode.rule: 'rule',
   Mode.global: 'global',
   Mode.direct: 'direct',

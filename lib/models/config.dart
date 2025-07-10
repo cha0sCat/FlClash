@@ -10,8 +10,10 @@ import 'models.dart';
 part 'generated/config.freezed.dart';
 part 'generated/config.g.dart';
 
+// 默认客户端配置参数初始化
 final defaultAppSetting = const AppSetting().copyWith(
   isAnimateToPage: system.isDesktop ? false : true,
+  showLabel: true,
 );
 
 @freezed

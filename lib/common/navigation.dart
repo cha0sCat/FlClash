@@ -9,7 +9,7 @@ class Navigation {
   getItems({
     bool openLogs = false,
     bool hasProxies = false,
-  }) {
+  }) {  // 侧边栏按钮
     return [
       const NavigationItem(
         icon: Icon(Icons.space_dashboard),
