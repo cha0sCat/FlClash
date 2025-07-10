@@ -320,10 +320,10 @@ class AppController {
   }
 
   init() async {
-    final isDisclaimerAccepted = await handlerDisclaimer();
-    if (!isDisclaimerAccepted) {
-      handleExit();
-    }
+    // final isDisclaimerAccepted = await handlerDisclaimer();
+    // if (!isDisclaimerAccepted) {
+    //   handleExit();
+    // }
     if (!config.appSetting.silentLaunch) {
       window?.show();
     }
@@ -334,7 +334,7 @@ class AppController {
     );
     await _initStatus();
     autoUpdateProfiles();
-    autoCheckUpdate();
+    // autoCheckUpdate();
   }
 
   _initStatus() async {
@@ -447,10 +447,10 @@ class AppController {
   }
 
   Future<bool> handlerDisclaimer() async {
-    if (config.appSetting.disclaimerAccepted) {
+    // if (config.appSetting.disclaimerAccepted) {
       return true;
-    }
-    return showDisclaimer();
+    // }
+    // return showDisclaimer();
   }
 
   addProfileFormURL(String url) async {
