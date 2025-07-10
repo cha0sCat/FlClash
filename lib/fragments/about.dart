@@ -156,8 +156,8 @@ class AboutFragment extends StatelessWidget {
       const SizedBox(
         height: 12,
       ),
-      ..._buildContributorsSection(),
-      ..._buildMoreSection(context),
+      // ..._buildContributorsSection(),
+      // ..._buildMoreSection(context),
     ];
     return Padding(
       padding: kMaterialListPadding.copyWith(
