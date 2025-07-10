@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:collection/collection.dart';
 import 'package:path/path.dart';
+import 'package:charset/charset.dart';
 
 enum TargetPlatform {
   windows,
@@ -98,6 +99,64 @@ class Build {
     return "gcc";
   }
 
+  /// 解码并打印流数据，支持多种编码格式（UTF-8, GBK 等）
+  static Future<void> decodeAndPrint(Stream<List<int>> stream) async {
+    final buffer = <int>[];
+
+    await for (final data in stream) {
+      buffer.addAll(data);
+
+      // 尝试以UTF-8解码
+      try {
+        final decoded = utf8.decode(buffer, allowMalformed: false);
+        print(decoded);
+        buffer.clear();
+      } catch (e) {
+        // UTF-8解码失败，尝试其他编码
+        try {
+          // 针对Windows，尝试GBK编码
+          if (Platform.isWindows) {
+            final decoded = gbk.decode(buffer);
+            print(decoded);
+            buffer.clear();
+          } else {
+            // 如果缓冲区过大但仍无法解码，可能是二进制数据，直接输出
+            if (buffer.length > 1024) {
+              print("[Binary data or unsupported encoding]");
+              buffer.clear();
+            }
+            // 否则继续收集数据等待更完整的编码
+          }
+        } catch (e) {
+          // 如果缓冲区过大但仍无法解码，清空避免内存溢出
+          if (buffer.length > 8192) {
+            print("[Unable to decode data with current encoding support]");
+            buffer.clear();
+          }
+        }
+      }
+    }
+
+    // 处理剩余数据
+    if (buffer.isNotEmpty) {
+      try {
+        final decoded = utf8.decode(buffer, allowMalformed: true);
+        print(decoded);
+      } catch (e) {
+        try {
+          if (Platform.isWindows) {
+            final decoded = gbk.decode(buffer);
+            print(decoded);
+          } else {
+            print("[Remaining data could not be decoded]");
+          }
+        } catch (e) {
+          print("[Remaining data could not be decoded]");
+        }
+      }
+    }
+  }
+
   static Future<void> exec(
     List<String> command, {
     String? name,
@@ -113,10 +172,12 @@ class Build {
       workingDirectory: workingDirectory,
       runInShell: runInShell,
     );
+
     await Future.wait([
-      process.stdout.transform(utf8.decoder).forEach(print),
-      process.stderr.transform(utf8.decoder).forEach(print),
+      decodeAndPrint(process.stdout),
+      decodeAndPrint(process.stderr),
     ]);
+
     final exitCode = await process.exitCode;
     if (exitCode != 0) {
       throw "Error in $name with exit code $exitCode";

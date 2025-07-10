@@ -54,6 +54,7 @@ dependencies:
   device_info_plus: ^10.1.2
   connectivity_plus: ^6.1.0
   screen_retriever: ^0.2.0
+  charset: ^2.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
