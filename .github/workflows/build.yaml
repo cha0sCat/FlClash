@@ -2,6 +2,9 @@ name: build
 
 on:
   push:
+    branches-ignore:
+      - 'lite'
+      - 'refs/heads/lite'
   workflow_dispatch:
 
 jobs:
