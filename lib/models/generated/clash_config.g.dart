@@ -406,7 +406,7 @@ Map<String, dynamic> _$$ClashConfigImplToJson(_$ClashConfigImpl instance) =>
       'hosts': instance.hosts,
     };
 
-const _$ModeEnumMap = {
+const _$ModeEnumMap = {  // 代理模式
   Mode.rule: 'rule',
   Mode.global: 'global',
   Mode.direct: 'direct',

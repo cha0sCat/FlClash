@@ -554,14 +554,14 @@ class AppController {
       _ref.read(appSettingProvider).autoLaunch,
     );
     autoUpdateProfiles();
-    autoCheckUpdate();
+    autoCheckUpdate();  // 版本更新
     if (!_ref.read(appSettingProvider).silentLaunch) {
       window?.show();
     } else {
       window?.hide();
     }
     await _handlePreference();
-    await _handlerDisclaimer();
+    await _handlerDisclaimer();  // 免责声明
     _ref.read(initProvider.notifier).value = true;
   }
 
@@ -583,7 +583,7 @@ class AppController {
     _ref.read(delayDataSourceProvider.notifier).setDelay(delay);
   }
 
-  toPage(PageLabel pageLabel) {
+  toPage(PageLabel pageLabel) {  // 主界面选页
     _ref.read(currentPageLabelProvider.notifier).value = pageLabel;
   }
 
